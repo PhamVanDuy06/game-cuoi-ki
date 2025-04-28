@@ -8,14 +8,16 @@
 1744365343 d:\gamehard\gamecuoiki\graphics.h
 	"defs.h"
 
-1744365575 d:\gamehard\gamecuoiki\defs.h
+1744766521 d:\gamehard\gamecuoiki\defs.h
 	<iostream>
 	<vector>
 	<SDL.h>
 	<SDL_image.h>
 
-1744364706 source:d:\gamehard\gamecuoiki\main.cpp
+1744515493 source:d:\gamehard\gamecuoiki\main.cpp
 	"Graphics.h"
+	<cstdlib>
+	<ctime>
 
 1744161603 d:\gamehard\gamecuoiki\player.h
 

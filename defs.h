@@ -14,7 +14,7 @@ const int SCREEN_HEIGHT = 170;
 #define DOG_RUN_MOVE "imageRUN.png"
 #define BACK_GROUND "bg1.png"
 #define DOG_JUMP_MOVE "imageJUMP.png"
-#define OBSTACLE_TREE "imageObstacle.png"
+#define OBSTACLE_TREE "pixilart-drawing.png"
 
 const int DOG_CLIPS_RUN [][4] = {
     {0, 0, 32, 20},
@@ -30,11 +30,7 @@ const int DOG_CLIPS_JUMP [][4] = {
 const int DOG_FRAMES_JUMP = sizeof(DOG_CLIPS_JUMP) / sizeof(int) / 4;
 
 const int OBSTACLE_CLIP_TREE [][4] = {
-    {0, 0, 41, 90},
-    {41, 0, 41, 90},
-    {82, 0, 41, 90},
-    {123, 0, 41, 90},
-    {164, 0, 41, 90}
+    {0, 0, 16, 20}
 };
 const int OBSTACLE_FRAMES_TREE = sizeof(OBSTACLE_CLIP_TREE) / sizeof(int) / 4;
 
