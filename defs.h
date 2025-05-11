@@ -6,15 +6,16 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-const int SCREEN_WIDTH = 500;
-const int SCREEN_HEIGHT = 170;
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
 #define WINDOW_TITLE  "Meo meo"
-#define DOGY 120
+#define DOGY 400
 
 #define DOG_RUN_MOVE "imageRUN.png"
 #define BACK_GROUND "bg1.png"
 #define DOG_JUMP_MOVE "imageJUMP.png"
-#define OBSTACLE_TREE "pixilart-drawing.png"
+#define OBSTACLE_TREE "imageOBS.png"
+#define MENU_IMAGE "bg2.png"
 
 const int DOG_CLIPS_RUN [][4] = {
     {0, 0, 32, 20},

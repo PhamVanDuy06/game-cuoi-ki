@@ -78,8 +78,8 @@ struct Graphics {
         SDL_RenderCopy(renderer, sprite.texture, clip, &renderQuad);
     }
     void renderbg(const ScrollingBackground& bgr) {
-        renderTexture(bgr.texture, bgr.scrollingOffset, 130);
-        renderTexture(bgr.texture, bgr.scrollingOffset - bgr.width, 130);
+        renderTexture(bgr.texture, bgr.scrollingOffset,0);
+        renderTexture(bgr.texture, bgr.scrollingOffset - bgr.width,0);
     }
 
 };

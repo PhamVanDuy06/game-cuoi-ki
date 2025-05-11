@@ -5,21 +5,25 @@
 	<SDL_image.h>
 	"Graphics.h"
 
-1744365343 d:\gamehard\gamecuoiki\graphics.h
+1746787732 d:\gamehard\gamecuoiki\graphics.h
 	"defs.h"
 
-1744766521 d:\gamehard\gamecuoiki\defs.h
+1746978419 d:\gamehard\gamecuoiki\defs.h
 	<iostream>
 	<vector>
 	<SDL.h>
 	<SDL_image.h>
 
-1744515493 source:d:\gamehard\gamecuoiki\main.cpp
+1746985299 source:d:\gamehard\gamecuoiki\main.cpp
 	"Graphics.h"
 	<cstdlib>
 	<ctime>
+	"player.h"
+	<SDL_ttf.h>
+	<SDL_mixer.h>
 
-1744161603 d:\gamehard\gamecuoiki\player.h
+1746977010 d:\gamehard\gamecuoiki\player.h
+	"defs.h"
 
-1744161600 source:d:\gamehard\gamecuoiki\player.cpp
+1746867284 source:d:\gamehard\gamecuoiki\player.cpp
 
