@@ -5,17 +5,24 @@
 #include <vector>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 #define WINDOW_TITLE  "Meo meo"
-#define DOGY 400
+#define DOGY 500
 
 #define DOG_RUN_MOVE "imageRUN.png"
 #define BACK_GROUND "bg1.png"
 #define DOG_JUMP_MOVE "imageJUMP.png"
 #define OBSTACLE_TREE "imageOBS.png"
 #define MENU_IMAGE "bg2.png"
+#define RESTAR_IMAGE "imageRestar.png"
+#define ClickMenu "ClickMenu.ogg"
+#define ClickJump "ClickJump.ogg"
+#define VaCham "Vacham.wav"
+#define ChoiNhac "NhacNen.wav"
 
 const int DOG_CLIPS_RUN [][4] = {
     {0, 0, 32, 20},

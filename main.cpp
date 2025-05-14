@@ -2,8 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "player.h"
-#include <SDL_ttf.h>
-#include <SDL_mixer.h>
+
 using namespace std;
 
 enum GameState {
@@ -38,7 +37,7 @@ struct Obstacle {
     }
 
     bool isOffScreen() {
-        return x + 32 < 0;
+        return x + 16*4 < 0;
     }
 };
 
@@ -47,8 +46,8 @@ SDL_Rect getDogRect(const Sprite &sprite){
     SDL_Rect rect;
     rect.x = 0;
     rect.y = (int)posY;
-    rect.w = clip ->w *2;
-    rect.h = clip ->h *2;
+    rect.w = clip ->w *3;
+    rect.h = clip ->h *3;
     return rect;
 }
 SDL_Rect getobstacleRect(const Obstacle& obs){
@@ -56,8 +55,8 @@ SDL_Rect getobstacleRect(const Obstacle& obs){
     SDL_Rect rect;
     rect.x = (int)obs.x;
     rect.y = (int)obs.y;
-    rect.w =  clip->w *2;
-    rect.h = clip ->h *2;
+    rect.w =  clip->w *3;
+    rect.h = clip ->h *3;
 
     return rect;
 }
@@ -93,6 +92,13 @@ int main(int argc, char *argv[]) {
     Graphics graphics;
     graphics.init();
 
+    Mix_Chunk *gClickMenu = graphics.loadSound(ClickMenu);
+    Mix_Chunk *gJump = graphics.loadSound(ClickJump);
+    Mix_Chunk *gVaCham = graphics.loadSound(VaCham);
+
+    Mix_Music *gMusic = graphics.loadMusic(ChoiNhac);
+    graphics.playMusic(gMusic);
+
         float img_ref_width = 800.0f;
         float img_ref_height = 600.0f;
 
@@ -116,14 +122,21 @@ int main(int argc, char *argv[]) {
             (int)(300.0f / img_ref_width * SCREEN_WIDTH),
             (int)(110.0f / img_ref_height * SCREEN_HEIGHT)
         };
+        SDL_Rect restarButtonRect = {
+            (int)(280.0f / img_ref_width * SCREEN_WIDTH),
+            (int)(290.0f / img_ref_height * SCREEN_HEIGHT),
+            (int)(300.0f / img_ref_width * SCREEN_WIDTH),
+            (int)(110.0f / img_ref_height * SCREEN_HEIGHT)
+        };
 
 
     SDL_Texture* menuTexture = graphics.loadTexture(MENU_IMAGE);
-    if (menuTexture == nullptr) {
+    SDL_Texture* restarTexture = graphics.loadTexture(RESTAR_IMAGE);
+    /*if (menuTexture == nullptr) {
         cerr << "Failed to load menu image: " << "MENU" << " - SDL_Error: " << IMG_GetError() << endl;
         graphics.quit();
         return 0;
-    }
+    */
 
     ScrollingBackground background;
     background.setTexture(graphics.loadTexture(BACK_GROUND));
@@ -168,11 +181,13 @@ int main(int argc, char *argv[]) {
 
                             if (SDL_PointInRect(&mousePoint, &playButtonRect)) {
                                 cout << "EVENT: Play button clicked!" << endl;
+                                graphics.playChunk(gClickMenu);
                                 currentState = PLAYING;
                                 resetGame(obstacles, num_die, nextSpawnTime, lastTime, dog, dogjump);
                             }
                             else if (SDL_PointInRect(&mousePoint, &exitButtonRect)) {
                                 cout << "EVENT: Exit button clicked!" << endl;
+                                graphics.playChunk(gClickMenu);
                                 quit = true;
                                 }
                             }
@@ -182,6 +197,7 @@ int main(int argc, char *argv[]) {
                     if (currentState == PLAYING) {
                         if (e.type == SDL_KEYDOWN) {
                             if (e.key.keysym.sym == SDLK_SPACE && !isJumping) {
+                                graphics.playChunk(gJump);
                                 isJumping = true;
                                 velocity = jumpVelocity;
                                 jumpTime = 0.0f;
@@ -239,6 +255,7 @@ int main(int argc, char *argv[]) {
                obstacles[i].dabivacham();
                num_die++;
                cout << "Va cham! So lan: " << num_die << endl;
+               graphics.playChunk(gVaCham);
                SDL_Delay(1000);
             }
 
@@ -250,17 +267,33 @@ int main(int argc, char *argv[]) {
             }
 
             if (num_die >= 3){
-                cout << "Game Over! Quay ve Menu." << endl;
-                currentState = MENU;
-                SDL_Delay(2000);
+                SDL_Delay(1000);
+                graphics.prepareScene(restarTexture);
+                while(SDL_PollEvent(&e)){
+                        if(e.type == SDL_MOUSEBUTTONDOWN){
+                            if (e.button.button == SDL_BUTTON_LEFT){
+                                int mouseX, mouseY;
+                                SDL_GetMouseState(&mouseX,&mouseY);
+                                SDL_Point mousePoint = {mouseX, mouseY};
+                                if (SDL_PointInRect(&mousePoint, &restarButtonRect)){
+                                    graphics.playChunk(gClickMenu);
+                                    currentState = MENU;
+                                }
+                            }
+                        }
+                }
                 break;
             }
-        }
+          }
         }
         graphics.presentScene();
         SDL_Delay(16);
     }
 
+    if (gJump != nullptr) Mix_FreeChunk( gJump);
+    if (gClickMenu != nullptr) Mix_FreeChunk( gClickMenu);
+    if (gVaCham != nullptr) Mix_FreeChunk( gVaCham);
+    if (gMusic != nullptr) Mix_FreeMusic( gMusic );
     SDL_DestroyTexture(menuTexture);
     SDL_DestroyTexture(runTexture);
     SDL_DestroyTexture(jumpTexture);
