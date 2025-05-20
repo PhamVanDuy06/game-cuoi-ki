@@ -43,13 +43,23 @@ Một số nguyên lý hoạt động :
 
 1. Xử lý va chạm :
    Nguyên Lý : Dựa trên tọa độ hình chữ nhật (SDL_Rect) của hai vật thể, ta xét xem các góc hoặc cạnh của chúng có nằm trong vùng của nhau không.
-   Cách hoạt động : Tính 4 cạnh của mỗi vật thể (left, right, top, bottom).
+   Cách hoạt động :
+   -Tính 4 cạnh của mỗi vật thể (left, right, top, bottom).
 
-                    Kiểm tra xem cạnh của object1 nằm trong vùng của object2, và ngược lại.
+   -Kiểm tra xem cạnh của object1 nằm trong vùng của object2, và ngược lại.
                     
-                    Nếu có bất kỳ góc nào của hình này nằm trong hình kia → va chạm xảy ra.
+   -Nếu có bất kỳ góc nào của hình này nằm trong hình kia → va chạm xảy ra.
 
-2. Xử lý nhân vật nhảy : Dựa vào phương trình bật 2 : y = Yo + Vo*t + 1/2 * a * t^2. 
+2. Xử lý nhân vật nhảy :
+
+   Nguyên lý: Dựa vào phương trình bậc 2 : y = Yo + Vo*t + 1/2 * a * t^2.
+
+Các nguồn tham khảo :
+- Tài liệu lập trình nâng cao
+- https://lazyfoo.net/tutorials/SDL/
+- Hình ảnh và âm thanh : https://opengameart.org/, canva, ...
+- Trong quá trình làm game, mình gặp nhiều bug khó và chưa có kinh nghiệm debug nên sử dụng AI support. Ví dụ: khó khăn trong việc xử lý quá trình vẽ và xóa ảnh khi gaem chạy soa cho mượt.
+  
                     
 
 
