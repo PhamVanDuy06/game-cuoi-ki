@@ -59,6 +59,7 @@ __Ngưỡng điểm mong muốn__ : 7,5 - 8
 - https://lazyfoo.net/tutorials/SDL/
 - Hình ảnh và âm thanh : https://opengameart.org/, canva, ...
 - Trong quá trình làm game, mình gặp nhiều bug khó và chưa có kinh nghiệm debug nên sử dụng AI support.
+
   Ví dụ: khó khăn trong việc xử lý quá trình vẽ và xóa ảnh khi game chạy sao cho mượt.
   
                     
