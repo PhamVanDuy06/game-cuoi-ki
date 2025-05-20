@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1747067775 source:d:\gamehard\gamecuoiki\graphics.cpp
+1747723515 source:d:\gamehard\gamecuoiki\graphics.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 	"Graphics.h"
 
-1747070874 d:\gamehard\gamecuoiki\graphics.h
+1747723152 d:\gamehard\gamecuoiki\graphics.h
 	"defs.h"
 
-1747070481 d:\gamehard\gamecuoiki\defs.h
+1747730292 d:\gamehard\gamecuoiki\defs.h
 	<iostream>
 	<vector>
 	<SDL.h>
@@ -16,7 +16,7 @@
 	<SDL_ttf.h>
 	<SDL_mixer.h>
 
-1747070984 source:d:\gamehard\gamecuoiki\main.cpp
+1747733875 source:d:\gamehard\gamecuoiki\main.cpp
 	"Graphics.h"
 	<cstdlib>
 	<ctime>

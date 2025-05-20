@@ -7,7 +7,8 @@ using namespace std;
 
 enum GameState {
     MENU,
-    PLAYING
+    PLAYING,
+    GAME_OVER
 };
 
 struct Obstacle {
@@ -69,7 +70,7 @@ void resetGame(vector<Obstacle>& obstacles_list,
                Sprite& player_dog_jump_sprite)
 {
     obstacles_list.clear();
-    num_die_count = 0;
+    num_die_count = 3;
 
     posY = groundY;
     isJumping = false;
@@ -92,6 +93,11 @@ int main(int argc, char *argv[]) {
     Graphics graphics;
     graphics.init();
 
+    TTF_Font* font = graphics.loadFont("Purisa-BoldOblique.ttf",28);
+
+    SDL_Color color = {0, 0, 0, 255};
+    SDL_Texture* helloText = graphics.renderText("Heart :", font, color);
+
     Mix_Chunk *gClickMenu = graphics.loadSound(ClickMenu);
     Mix_Chunk *gJump = graphics.loadSound(ClickJump);
     Mix_Chunk *gVaCham = graphics.loadSound(VaCham);
@@ -102,41 +108,20 @@ int main(int argc, char *argv[]) {
         float img_ref_width = 800.0f;
         float img_ref_height = 600.0f;
 
-        SDL_Rect playButtonRect = {
-            (int)(280.0f / img_ref_width * SCREEN_WIDTH),
-            (int)(120.0f / img_ref_height * SCREEN_HEIGHT),
-            (int)(300.0f / img_ref_width * SCREEN_WIDTH),
-            (int)(110.0f / img_ref_height * SCREEN_HEIGHT)
-        };
+        SDL_Rect playButtonRect = {260, 230, 270, 130};
 
-        SDL_Rect exitButtonRect = {
-            (int)(280.0f / img_ref_width * SCREEN_WIDTH),
-            (int)(290.0f / img_ref_height * SCREEN_HEIGHT),
-            (int)(300.0f / img_ref_width * SCREEN_WIDTH),
-            (int)(110.0f / img_ref_height * SCREEN_HEIGHT)
-        };
+        SDL_Rect exitButtonRect = {260, 410, 270, 130};
 
-        SDL_Rect helpButtonRect = { // Sẽ dùng sau
-            (int)(280.0f / img_ref_width * SCREEN_WIDTH),
-            (int)(460.0f / img_ref_height * SCREEN_HEIGHT),
-            (int)(300.0f / img_ref_width * SCREEN_WIDTH),
-            (int)(110.0f / img_ref_height * SCREEN_HEIGHT)
-        };
-        SDL_Rect restarButtonRect = {
-            (int)(280.0f / img_ref_width * SCREEN_WIDTH),
-            (int)(290.0f / img_ref_height * SCREEN_HEIGHT),
-            (int)(300.0f / img_ref_width * SCREEN_WIDTH),
-            (int)(110.0f / img_ref_height * SCREEN_HEIGHT)
-        };
+        SDL_Rect restarButtonRect = {260, 230, 270, 130};
 
 
     SDL_Texture* menuTexture = graphics.loadTexture(MENU_IMAGE);
     SDL_Texture* restarTexture = graphics.loadTexture(RESTAR_IMAGE);
-    /*if (menuTexture == nullptr) {
-        cerr << "Failed to load menu image: " << "MENU" << " - SDL_Error: " << IMG_GetError() << endl;
-        graphics.quit();
-        return 0;
-    */
+    SDL_Texture* HeartTexture = graphics.loadTexture(Heart);
+    SDL_Texture* playline = graphics.loadTexture(PlayisLine);
+    SDL_Texture* exitline = graphics.loadTexture(ExitisLine);
+    SDL_Texture* restartline = graphics.loadTexture(RestartisLine);
+
 
     ScrollingBackground background;
     background.setTexture(graphics.loadTexture(BACK_GROUND));
@@ -163,22 +148,55 @@ int main(int argc, char *argv[]) {
 
     Uint32 lastTime = SDL_GetTicks();
 
-    int num_die = 0;
+    int num_die = 3;
 
     GameState currentState = MENU;
+
+    bool isMouseOverPlay = false;
+    bool isMouseOverExit = false;
+    bool isMouseOverRestart = false;
 
     while (!quit) {
         while (SDL_PollEvent(&e) != 0) {
             if (e.type == SDL_QUIT) {
                 quit = true;
             }
+
+            if (e.type == SDL_MOUSEMOTION) {
+
+                    int mouseXx = e.motion.x;
+                    int mouseYy = e.motion.y;
+                    SDL_Point mousePoint = {mouseXx, mouseYy};
+                if (currentState == MENU) {
+
+                    if (SDL_PointInRect(&mousePoint, &playButtonRect)) {
+                        isMouseOverPlay = true;
+                    } else {
+                        isMouseOverPlay = false;
+                    }
+                    if(SDL_PointInRect(&mousePoint, &exitButtonRect)){
+                        isMouseOverExit = true;
+                    }else {
+                        isMouseOverExit = false;
+                    }
+
+                }else if(currentState == GAME_OVER){
+                    if(SDL_PointInRect(&mousePoint, &restarButtonRect)){
+                        isMouseOverRestart = true;
+                    }
+                    else{
+                        isMouseOverRestart = false;
+                    }
+                }
+            }
+
             if (e.type == SDL_MOUSEBUTTONDOWN){
                 if (e.button.button == SDL_BUTTON_LEFT){
-                    if (currentState == MENU){
                         int mouseX, mouseY;
                         SDL_GetMouseState(&mouseX,&mouseY);
                         SDL_Point mousePoint = {mouseX, mouseY};
 
+                    if (currentState == MENU){
                             if (SDL_PointInRect(&mousePoint, &playButtonRect)) {
                                 cout << "EVENT: Play button clicked!" << endl;
                                 graphics.playChunk(gClickMenu);
@@ -189,6 +207,12 @@ int main(int argc, char *argv[]) {
                                 cout << "EVENT: Exit button clicked!" << endl;
                                 graphics.playChunk(gClickMenu);
                                 quit = true;
+                                }
+                            }
+                            else if (currentState == GAME_OVER){
+                                if (SDL_PointInRect(&mousePoint, &restarButtonRect)){
+                                    graphics.playChunk(gClickMenu);
+                                    currentState = MENU;
                                 }
                             }
                         }
@@ -205,15 +229,25 @@ int main(int argc, char *argv[]) {
                             }
                         }
                     }
+
                 }
 
 
         if (currentState == MENU){
+            graphics.prepareScene(nullptr);
             graphics.prepareScene(menuTexture);
+
+            if (isMouseOverPlay && playline) {
+                graphics.renderTexture(playline,0,0);
+            }
+            if(isMouseOverExit && exitline){
+                graphics.renderTexture(exitline,0,0);
+            }
             cout << "da ve len buffer" << endl;
         }
         else if (currentState == PLAYING){
             cout << "dang o playing" << endl;
+
             Uint32 currentTime = SDL_GetTicks();
             float deltaTime = (currentTime - lastTime) / 1000.0f;
             lastTime = currentTime;
@@ -230,9 +264,18 @@ int main(int argc, char *argv[]) {
                 nextSpawnTime = currentTime + 1500 + rand() % 1500;
             }
 
+
+
         background.scroll(3);
         graphics.renderbg(background);
 
+        graphics.renderTexture(helloText, 0, 50);
+
+
+        int tmp = 16; //kich thuoc anh hear
+        for(int i = 0; i < num_die; i++){
+            graphics.renderTexture(HeartTexture,tmp*(i+1) + i*15,100);
+        }
 
         if (isJumping) {
             graphics.render(0, posY, dogjump);
@@ -253,7 +296,7 @@ int main(int argc, char *argv[]) {
 
            if (!obstacles[i].daBiVaChamRoi() && check(dogRect, obstacleRect)) {
                obstacles[i].dabivacham();
-               num_die++;
+               num_die--;
                cout << "Va cham! So lan: " << num_die << endl;
                graphics.playChunk(gVaCham);
                SDL_Delay(1000);
@@ -266,34 +309,34 @@ int main(int argc, char *argv[]) {
                 ++i;
             }
 
-            if (num_die >= 3){
-                SDL_Delay(1000);
-                graphics.prepareScene(restarTexture);
-                while(SDL_PollEvent(&e)){
-                        if(e.type == SDL_MOUSEBUTTONDOWN){
-                            if (e.button.button == SDL_BUTTON_LEFT){
-                                int mouseX, mouseY;
-                                SDL_GetMouseState(&mouseX,&mouseY);
-                                SDL_Point mousePoint = {mouseX, mouseY};
-                                if (SDL_PointInRect(&mousePoint, &restarButtonRect)){
-                                    graphics.playChunk(gClickMenu);
-                                    currentState = MENU;
-                                }
-                            }
-                        }
-                }
-                break;
+            if (num_die <= 0){
+
+                currentState = GAME_OVER;
+
             }
           }
+        }else if (currentState == GAME_OVER){
+            graphics.prepareScene(nullptr);
+            graphics.prepareScene(restarTexture);
+
+            if (isMouseOverRestart && restartline) {
+            graphics.renderTexture(restartline, 0, 0);
+            }
         }
+
         graphics.presentScene();
         SDL_Delay(16);
     }
+
+    SDL_DestroyTexture( helloText );
+    helloText = NULL;
+    TTF_CloseFont( font );
 
     if (gJump != nullptr) Mix_FreeChunk( gJump);
     if (gClickMenu != nullptr) Mix_FreeChunk( gClickMenu);
     if (gVaCham != nullptr) Mix_FreeChunk( gVaCham);
     if (gMusic != nullptr) Mix_FreeMusic( gMusic );
+    SDL_DestroyTexture(HeartTexture);
     SDL_DestroyTexture(menuTexture);
     SDL_DestroyTexture(runTexture);
     SDL_DestroyTexture(jumpTexture);

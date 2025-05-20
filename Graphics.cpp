@@ -35,6 +35,10 @@ void Graphics::init() {
        logErrorAndExit( "SDL_mixer could not initialize! SDL_mixer Error: %s\n",
                         Mix_GetError() );
     }
+    if (TTF_Init() == -1) {
+            logErrorAndExit("SDL_ttf could not initialize! SDL_ttf Error: ",
+                             TTF_GetError());
+        }
 
 
 }
@@ -86,6 +90,7 @@ void Graphics::blitRect(SDL_Texture *texture, SDL_Rect *src, int x, int y)
 
 void Graphics::quit()
 {
+    TTF_Quit();
     IMG_Quit();
 
     SDL_DestroyRenderer(renderer);
