@@ -7,7 +7,7 @@ bạn phải vượt qua các chướng ngại để sống sót. Game viết b�
 
 __Ngưỡng điểm mong muốn__ : 7,5 - 8
 
-##__Các tính năng trong game__ :
+## __Các tính năng trong game__ :
 
 -Texture
 
@@ -39,7 +39,7 @@ __Ngưỡng điểm mong muốn__ : 7,5 - 8
 ![image](https://github.com/user-attachments/assets/58b0de4b-9e23-493f-8c51-d74250ad0c05)
 
 
-##__Một số nguyên lý hoạt động__ :
+## __Một số nguyên lý hoạt động__ :
 
 1. __Xử lý va chạm__ :
  
