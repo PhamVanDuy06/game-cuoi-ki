@@ -5,7 +5,7 @@ __Mã sinh viên__ : 24021453
 __Giới thiệu chủ đề game__ : Một game 2D đơn giản nơi bạn xả stress khi mất kết nối mạng,
 bạn phải vượt qua các chướng ngại để sống sót. Game viết bằng SDL2 và code c++.
 
-__Ngưỡng điểm mong muốn__ : 7,5 - 8
+__Ngưỡng điểm mong muốn__ : 7,5
 
 ## __Các tính năng trong game__ :
 
@@ -53,6 +53,8 @@ __Ngưỡng điểm mong muốn__ : 7,5 - 8
 4. __Xử lý nhân vật nhảy__ :
 
    __Nguyên lý__ : Dựa vào phương trình bậc 2 : y = Yo + Vo*t + 1/2 * a * t^2.
+
+## __DEMO__ : 
 
 ## __Các nguồn tham khảo__ :
 - Tài liệu lập trình nâng cao
