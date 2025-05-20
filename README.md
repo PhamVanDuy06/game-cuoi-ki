@@ -31,7 +31,7 @@ __Ngưỡng điểm mong muốn__ : 7,5 - 8
 
 -Status bar
 
-##__Hình ảnh minh họa__ :
+## __Hình ảnh minh họa__ :
 ![image](https://github.com/user-attachments/assets/c09553c9-dbbb-4b5f-bdce-42c4e17016e5)
 
 ![image](https://github.com/user-attachments/assets/f954322a-5a98-4057-b3d5-ee8df2fa2672)
@@ -52,7 +52,7 @@ __Ngưỡng điểm mong muốn__ : 7,5 - 8
 
 4. __Xử lý nhân vật nhảy__ :
 
-   __Nguyên lý__: Dựa vào phương trình bậc 2 : y = Yo + Vo*t + 1/2 * a * t^2.
+   __Nguyên lý__ : Dựa vào phương trình bậc 2 : y = Yo + Vo*t + 1/2 * a * t^2.
 
 ## __Các nguồn tham khảo__ :
 - Tài liệu lập trình nâng cao
