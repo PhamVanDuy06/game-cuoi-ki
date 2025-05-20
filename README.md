@@ -13,5 +13,22 @@ Các tính năng có trong game :
 
 -Background
 
--
+-Event bàn phím
+
+-Event chuột
+
+-Animation
+
+-Xử lý va chạm
+
+-Sound
+
+-Background music
+
+-Menu
+
+-Resum
+
+-Status bar
+
 
