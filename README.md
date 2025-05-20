@@ -8,7 +8,6 @@ bạn phải vượt qua các chướng ngại để sống sót. Game viết b�
 Ngưỡng điểm mong muốn : 7,5 điểm.
 
 Các tính năng có trong game :
-
 -Texture
 
 -Background
