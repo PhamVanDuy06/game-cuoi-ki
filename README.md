@@ -39,7 +39,18 @@ Hình ảnh minh họa :
 ![image](https://github.com/user-attachments/assets/58b0de4b-9e23-493f-8c51-d74250ad0c05)
 
 
+Một số nguyên lý hoạt động :
 
+1. Xử lý va chạm :
+   Nguyên Lý : Dựa trên tọa độ hình chữ nhật (SDL_Rect) của hai vật thể, ta xét xem các góc hoặc cạnh của chúng có nằm trong vùng của nhau không.
+   Cách hoạt động : Tính 4 cạnh của mỗi vật thể (left, right, top, bottom).
+
+                    Kiểm tra xem cạnh của object1 nằm trong vùng của object2, và ngược lại.
+                    
+                    Nếu có bất kỳ góc nào của hình này nằm trong hình kia → va chạm xảy ra.
+
+2. Xử lý nhân vật nhảy : Dựa vào phương trình bật 2 : y = Yo + Vo*t + 1/2 * a * t^2. 
+                    
 
 
 
