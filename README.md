@@ -1,13 +1,13 @@
-Họ và tên : Phạm Văn Duy
+__Họ và tên__ : Phạm Văn Duy
 
-Mã sinh viên : 24021453
+__Mã sinh viên__ : 24021453
 
-Giới thiệu chủ đề game : Một game 2D đơn giản nơi bạn xả stress khi mất kết nối mạng,
+__Giới thiệu chủ đề game__ : Một game 2D đơn giản nơi bạn xả stress khi mất kết nối mạng,
 bạn phải vượt qua các chướng ngại để sống sót. Game viết bằng SDL2 và code c++.
 
-Ngưỡng điểm mong muốn : 7,5 - 8
+__Ngưỡng điểm mong muốn__ : 7,5 - 8
 
-Các tính năng trong game :
+##__Các tính năng trong game__ :
 
 -Texture
 
@@ -31,7 +31,7 @@ Các tính năng trong game :
 
 -Status bar
 
-Hình ảnh minh họa :
+##__Hình ảnh minh họa__ :
 ![image](https://github.com/user-attachments/assets/c09553c9-dbbb-4b5f-bdce-42c4e17016e5)
 
 ![image](https://github.com/user-attachments/assets/f954322a-5a98-4057-b3d5-ee8df2fa2672)
@@ -39,22 +39,22 @@ Hình ảnh minh họa :
 ![image](https://github.com/user-attachments/assets/58b0de4b-9e23-493f-8c51-d74250ad0c05)
 
 
-Một số nguyên lý hoạt động :
+##__Một số nguyên lý hoạt động__ :
 
-1. Xử lý va chạm :
+1. __Xử lý va chạm__ :
  
-   Nguyên Lý : Dựa trên tọa độ hình chữ nhật (SDL_Rect) của hai vật thể, ta xét xem các góc hoặc cạnh của chúng có nằm trong vùng của nhau không.
+   __Nguyên Lý__ : Dựa trên tọa độ hình chữ nhật (SDL_Rect) của hai vật thể, ta xét xem các góc hoặc cạnh của chúng có nằm trong vùng của nhau không.
    
-   Cách hoạt động :
+   __Cách hoạt động__ :
    - Tính 4 cạnh của mỗi vật thể (left, right, top, bottom).
    - Kiểm tra xem cạnh của object1 nằm trong vùng của object2, và ngược lại.
    - Nếu có bất kỳ góc nào của hình này nằm trong hình kia → va chạm xảy ra.
 
-4. Xử lý nhân vật nhảy :
+4. __Xử lý nhân vật nhảy__ :
 
-   Nguyên lý: Dựa vào phương trình bậc 2 : y = Yo + Vo*t + 1/2 * a * t^2.
+   __Nguyên lý__: Dựa vào phương trình bậc 2 : y = Yo + Vo*t + 1/2 * a * t^2.
 
-Các nguồn tham khảo :
+## __Các nguồn tham khảo__ :
 - Tài liệu lập trình nâng cao
 - https://lazyfoo.net/tutorials/SDL/
 - Hình ảnh và âm thanh : https://opengameart.org/, canva, ...
